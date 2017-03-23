@@ -7,7 +7,7 @@
     <th>Latitude</th>
   </thead>
   <tbody>
-    <tr ng-repeat="measurement in observationCtrl.observation.driftMeasurements">
+    <tr ng-repeat="measurement in observationCtrl.observation.driftMeasurements track by $index">
       <td>{{measurement.time}}</td>
       <td>{{measurement.longitude}}</td>
       <td>{{measurement.latitude}}</td>

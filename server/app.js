@@ -11,46 +11,46 @@ app.use( express.static(__dirname + "/../client") );
 let bodyParser = require("body-parser");
 let jsonParser = bodyParser.json();
 
-app.get("/sports", (request, response) => {
-  let sports = mongoUtil.sports();
-  sports.find().toArray((err,docs) => {
+app.get("/observations", (request, response) => {
+  let observations = mongoUtil.observations();
+  observations.find().toArray((err,docs) => {
     if(err) {
       response.sendStatus(400);
     }
     console.log(JSON.stringify(docs));
-    let sportNames = docs.map((sport) => sport.name);
-    response.json( sportNames );
+    let observationNames = docs.map((observation) => observation.name);
+    response.json( observationNames );
   });
 });
 
-app.get("/sports/:name", (request, response) => {
-  let sportName = request.params.name;
+app.get("/observations/:name", (request, response) => {
+  let observationName = request.params.name;
 
-  let sports = mongoUtil.sports();
-  sports.find({name: sportName}).limit(1).next((err,doc) => {
+  let observations = mongoUtil.observations();
+  observations.find({name: observationName}).limit(1).next((err,doc) => {
     if(err) {
       response.sendStatus(400);
     }
-    console.log( "Sport doc: ", doc );
+    console.log( "Observation doc: ", doc );
     response.json(doc);
   });
 
 });
 
 
-app.post("/sports/:name/medals", jsonParser, (request, response) => {
-  let sportName = request.params.name;
-  let newMedal = request.body.medal || {};
+app.post("/observations/:name/measurements", jsonParser, (request, response) => {
+  let observationName = request.params.name;
+  let newMeasurement = request.body.measurement || {};
 
-  if(!newMedal.division || !newMedal.year || !newMedal.country){
+  if(!newMeasurement.longitude || !newMeasurement.time || !newMeasurement.latitude){
     response.sendStatus(400);
   }
 
-  let sports = mongoUtil.sports();
-  let query = {name: sportName};
-  let update = {$push: {goldMedals: newMedal}};
+  let observations = mongoUtil.observations();
+  let query = {name: observationName};
+  let update = {$push: {driftMeasurements: newMeasurement}};
 
-  sports.findOneAndUpdate(query, update, (err, res) => {
+  observations.findOneAndUpdate(query, update, (err, res) => {
     if(err){
       response.sendStatus(400);
     }

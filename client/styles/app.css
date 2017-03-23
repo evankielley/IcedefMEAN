@@ -125,13 +125,13 @@ a {
   transition: 0.2s ease-in-out;
 }
 
-.card-link--cycling::after {
-  background-image: url('../images/icon-cycling.svg');
+.card-link--2002::after {
+  background-image: url('../images/icon-2002.svg');
   width: 200px;
 }
 
-.card-link--weightlifting::after {
-  background-image: url('../images/icon-weightlifting.svg');
+.card-link--2003::after {
+  background-image: url('../images/icon-2003.svg');
   width: 200px;
 }
 

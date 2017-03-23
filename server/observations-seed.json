@@ -1,0 +1,16 @@
+[
+  {
+    "name": "1",
+    "driftMeasurements": [
+      { "longitude": 45, "latitude": 45, "time": 600 },
+      { "longitude": 46, "latitude": 46, "time": 1200 }
+    ]
+  },
+  {
+    "name": "2",
+    "driftMeasurements": [
+      { "longitude": 55, "latitude": 55, "time": 800 },
+      { "longitude": 56, "latitude": 56, "time": 1400 }
+    ]
+  }
+]

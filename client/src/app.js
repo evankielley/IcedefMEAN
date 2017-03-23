@@ -1,62 +1,62 @@
 import angular from 'angular'
 import 'angular-ui-router'
-angular.module('olympics', ["ui.router"])
+angular.module('icebergs', ["ui.router"])
 
 .config(($stateProvider, $urlRouterProvider) => {
-  $urlRouterProvider.otherwise('/sports')
+  $urlRouterProvider.otherwise('/observations')
 
   $stateProvider
-    .state('sports', {
-      url: '/sports',
-      templateUrl: 'sports/sports-nav.html',
+    .state('observations', {
+      url: '/observations',
+      templateUrl: 'observations/observations-nav.html',
       resolve: {
-        sportsService: function($http) {
-          return $http.get('/sports');
+        observationsService: function($http) {
+          return $http.get('/observations');
         }
       },
-      controller: function(sportsService, $location) {
-        this.sports = sportsService.data;
+      controller: function(observationsService, $location) {
+        this.observations = observationsService.data;
 
-        this.isActive = (sport) => {
-          let pathRegexp = /sports\/(\w+)/;
+        this.isActive = (observation) => {
+          let pathRegexp = /observations\/(\w+)/;
           let match = pathRegexp.exec($location.path());
 
           console.log('hi')
           if(match === null || match.length === 0) return false;
-          let selectedSportName = match[1];
-          console.log('below', selectedSportName, sport)
+          let selectedObservationName = match[1];
+          console.log('below', selectedObservationName, observation)
 
-          return sport === selectedSportName;
+          return observation === selectedObservationName;
 
         };
       },
-      controllerAs: 'sportsCtrl'
+      controllerAs: 'observationsCtrl'
     })
-    .state('sports.medals', {
-      url: '/:sportName',
-      templateUrl: 'sports/sports-medals.html',
+    .state('observations.measurements', {
+      url: '/:observationName',
+      templateUrl: 'observations/observations-measurements.html',
       resolve: {
-        sportService: function($http, $stateParams) {
-          return $http.get(`/sports/${$stateParams.sportName}`);
+        observationService: function($http, $stateParams) {
+          return $http.get(`/observations/${$stateParams.observationName}`);
         }
       },
-      controller: function(sportService){
-        this.sport = sportService.data;
+      controller: function(observationService){
+        this.observation = observationService.data;
       },
-      controllerAs: 'sportCtrl'
+      controllerAs: 'observationCtrl'
     })
-    .state('sports.new', {
-      url: '/:sportName/medal/new',
-      templateUrl: 'sports/new-medal.html',
+    .state('observations.new', {
+      url: '/:observationName/measurement/new',
+      templateUrl: 'observations/new-measurement.html',
       controller: function($stateParams, $state, $http){
-        this.sportName = $stateParams.sportName;
+        this.observationName = $stateParams.observationName;
 
-        this.saveMedal = function(medal){
-          $http({method: 'POST', url: `/sports/${$stateParams.sportName}/medals`, data: {medal}}).then(function(){
-            $state.go('sports.medals', {sportName: $stateParams.sportName});
+        this.saveMeasurement = function(measurement){
+          $http({method: 'POST', url: `/observations/${$stateParams.observationName}/measurements`, data: {measurement}}).then(function(){
+            $state.go('observations.measurements', {observationName: $stateParams.observationName});
           });
         };
       },
-      controllerAs: 'newMedalCtrl'
+      controllerAs: 'newMeasurementCtrl'
     })
 })

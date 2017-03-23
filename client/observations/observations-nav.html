@@ -1,0 +1,19 @@
+<div class="cell">
+  <div class="observations-list">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li class="grid-box grid-box--6of12 observation-name" ng-repeat="observation in observationsCtrl.observations">
+        <div class="card" ng-class="{'is-active': observationsCtrl.isActive(observation)}">
+          <h2 class="card-title">
+
+            <a class="card-link card-link--{{ observation.toLowerCase() }}" ui-sref="observations.measurements({ observationName: observation })">
+              {{ observation }}
+            </a>
+
+          </h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="observations-info"  ui-view></div>

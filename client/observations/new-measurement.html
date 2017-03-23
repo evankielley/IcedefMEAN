@@ -1,0 +1,22 @@
+<form class="form" name="newMeasurementForm" ng-submit="newMeasurementCtrl.saveMeasurement(measurement)"/>
+
+  <h3 class="mbm">New Measurement for {{newMeasurementCtrl.observationName}}</h3>
+
+  <div class="form-field">
+    <label class="form-label" for="longitude">Longitude:</label>
+    <input class="form-input" id="longitude" required ng-model="measurement.longitude"/>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="latitude">Latitude:</label>
+    <input class="form-input" id="latitude" required ng-model="measurement.latitude"/>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="time">Time:</label>
+    <input class="form-input" id="time" required ng-model="measurement.time"/>
+  </div>
+
+  <input class="btn" type="submit" value="Submit" />
+
+</form>

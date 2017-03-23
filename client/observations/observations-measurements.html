@@ -1,0 +1,18 @@
+<h3>{{observationCtrl.observation.name}} Drift Measurements</h3>
+
+<table class="table">
+  <thead>
+    <th>Time</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="measurement in observationCtrl.observation.driftMeasurements">
+      <td>{{measurement.time}}</td>
+      <td>{{measurement.longitude}}</td>
+      <td>{{measurement.latitude}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<a class="btn" ui-sref="observations.new({observationName: observationCtrl.observation.name})">New Measurement</a>
